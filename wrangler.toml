@@ -1,0 +1,25 @@
+name = "classpulse"
+main = ".open-next/worker.js"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+# OpenNext-ийн кэш дахин баталгаажуулалтад (revalidation) Worker өөрийгөө дууддаг.
+[[services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "classpulse"
+
+[observability]
+enabled = true
+
+# Хэрэглэгч, сесс, ангийн суудлын зураглал хадгалах D1 өгөгдлийн сан.
+# `npx wrangler d1 create classpulse-db` ажиллуулсны дараа гарах
+# database_id-г доорх утгын оронд тавина.
+[[d1_databases]]
+binding = "DB"
+database_name = "classpulse-db"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
