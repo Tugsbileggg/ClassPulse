@@ -1,28 +1,28 @@
 import type { CSSProperties } from "react";
-import { BellRing, LayoutGrid, Presentation, Webcam } from "lucide-react";
+import { BellRing, Download, MonitorPlay, SquareDashedMousePointer } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const STEPS = [
   {
-    icon: Webcam,
-    title: "Камераа холбоно",
-    text: "Ангийг бүхэлд нь харах энгийн вэб камерыг ангийн компьютерт холбоно. Тусгай, үнэтэй төхөөрөмж шаардлагагүй.",
+    icon: Download,
+    title: "AI загварыг татаж суулгана",
+    text: "Энэ хуудасны «AI загвар татах» товчоор ClassPulse AI-г татаж, ангийн компьютертоо суулгана.",
   },
   {
-    icon: LayoutGrid,
-    title: "Суудлын зураглал тохируулна",
-    text: "Камерын дүрс дээр суудал бүрийг тэмдэглээд, тэнд суудаг сурагчийн нэрийг онооно. Нэг удаа, 10 орчим минут л зарцуулна.",
+    icon: MonitorPlay,
+    title: "Камерын дүрсээ нээнэ",
+    text: "Вэб камерын эсвэл сургуулийн хяналтын камерын програмаа нээж, ангийн дүрсийг дэлгэцэн дээрээ гаргана.",
   },
   {
-    icon: Presentation,
-    title: "Хичээлээ заана, AI ажиглана",
-    text: "Та хичээлээ ердийнхөөрөө заана. ClassPulse сурагч бүрийн идэвхийг хөтөч дотроо тасралтгүй дүгнэнэ.",
+    icon: SquareDashedMousePointer,
+    title: "Хянах хэсгээ сонгоно",
+    text: "ClassPulse AI-д камерын дүрс харагдаж буй цонх эсвэл дэлгэцийн хэсгийг заана. Нэг л удаа тохируулна.",
   },
   {
     icon: BellRing,
-    title: "Мэдэгдэл, тайлан авна",
-    text: "Анхаарал шаардсан агшинд мэдэгдэл хүлээн авч, өдрийн төгсгөлд сурагч бүрийн оролцооны тайлантай танилцана.",
+    title: "Мэдэгдэл хүлээн авна",
+    text: "Та хичээлээ ердийнхөөрөө заана. Сурагч унтах эсвэл утсаа оролдоход AI танд тэр даруй мэдэгдэнэ.",
   },
 ];
 
@@ -34,7 +34,7 @@ export function HowItWorks() {
           id="how-title"
           eyebrow="Хэрхэн ажилладаг"
           title="Дөрвөн энгийн алхмаар эхэлнэ"
-          description="Техникийн тусгай мэдлэг шаардахгүй. Бүртгүүлээд нэвтэрмэгц камераа холбож, суудлын зураглалаа хэдхэн минутад тохируулна."
+          description="Техникийн тусгай мэдлэг, шинэ камер шаардахгүй. Одоо байгаа компьютер, камераа ашиглана."
         />
 
         <div className="relative mt-14">

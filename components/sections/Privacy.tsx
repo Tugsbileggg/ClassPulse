@@ -6,13 +6,13 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 const PRINCIPLES = [
   {
     icon: MonitorSmartphone,
-    title: "Видео сервер рүү явдаггүй",
-    text: "Камерын дүрс зөвхөн ангийн компьютерийн хөтөч дотор боловсруулагдана. Видео, зураг хаашаа ч илгээгдэхгүй, хадгалагдахгүй.",
+    title: "Бүгд таны компьютер дээр",
+    text: "AI загвар ангийн компьютер дээр ажиллаж, дүрсийг тэнд нь шинжилнэ. Видео, зураг интернэтээр хаашаа ч илгээгдэхгүй, хадгалагдахгүй.",
   },
   {
     icon: ScanFace,
     title: "Нүүр танихгүй",
-    text: "Бид нүүр таних технологи ашигладаггүй. Сурагчийг царайгаар нь биш, багшийн тохируулсан суудлын зураглалаар ялгана.",
+    text: "AI хэн болохыг биш, юу болж байгааг л таньдаг — унтах эсвэл утас барих. Нүүр таних технологи, нүүрний өгөгдөл ашиглахгүй.",
   },
   {
     icon: HeartHandshake,
@@ -26,8 +26,13 @@ const PRINCIPLES = [
   },
 ];
 
-const STORED = ["Сурагч бүрийн оролцооны хувь", "Мэдэгдлийн цаг, төрөл", "Суудлын зураглал (суудал → сурагчийн нэр)"];
-const NEVER_STORED = ["Видео бичлэг", "Сурагчийн зураг, дүрс", "Нүүрний өгөгдөл, биометр мэдээлэл"];
+const STORED = ["Мэдэгдлийн цаг, төрөл (жишээ нь: 09:34 — утас)", "Таны програмын тохиргоо"];
+const NEVER_STORED = [
+  "Видео бичлэг",
+  "Сурагчийн зураг, дүрс",
+  "Нүүрний өгөгдөл, биометр мэдээлэл",
+  "Сурагчийн нэр, хувийн мэдээлэл",
+];
 
 export function Privacy() {
   return (
@@ -75,10 +80,10 @@ export function Privacy() {
           <div data-reveal className="self-start rounded-2xl bg-white p-6 text-slate-900 shadow-2xl shadow-black/20 sm:p-7">
             <h3 className="text-lg font-bold">Ямар мэдээлэл үлддэг вэ?</h3>
             <p className="mt-1 text-sm leading-relaxed text-slate-600">
-              Хичээлийн дараа сервер дээр зөвхөн нэгтгэсэн тоон мэдээлэл хадгалагдана.
+              Хичээлийн дараа зөвхөн таны компьютер дээр товч тэмдэглэл үлдэнэ.
             </p>
 
-            <h4 className="mt-6 text-sm font-semibold text-emerald-800">Хадгалагдана</h4>
+            <h4 className="mt-6 text-sm font-semibold text-emerald-800">Таны компьютерт хадгалагдана</h4>
             <ul className="mt-2 space-y-2">
               {STORED.map((item) => (
                 <li key={item} className="flex items-start gap-2.5 text-sm text-slate-700">
@@ -103,8 +108,8 @@ export function Privacy() {
             </ul>
 
             <p className="mt-6 rounded-xl bg-slate-50 p-4 text-sm leading-relaxed text-slate-600">
-              Оролцооны мэдээллийг зөвхөн тухайн ангийн багш болон сургуулийн эрх бүхий ажилтан харна. Гуравдагч
-              этгээдэд дамжуулахгүй.
+              Тэмдэглэлийг зөвхөн тухайн компьютерийг ашиглаж буй багш харна. ClassPulse ямар ч мэдээллийг
+              гуравдагч этгээдэд дамжуулахгүй.
             </p>
           </div>
         </div>

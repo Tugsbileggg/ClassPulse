@@ -44,6 +44,27 @@
   }
 }
 
+/* Hero жишээ зурган дээрх AI шинжилгээний "скан" шугам. */
+.cp-scan {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgb(38 87 230 / 0.08) 70%,
+    rgb(38 87 230 / 0.3) 98%,
+    transparent
+  );
+  animation: cp-scan 4.5s linear infinite;
+}
+
+@keyframes cp-scan {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(300%);
+  }
+}
+
 /* Scroll-д гарч ирэх fade-in. JS ажиллахгүй бол контент хэвийн харагдана:
    `reveal-pending` классыг зөвхөн RevealOnScroll компонент нэмдэг. */
 [data-reveal] {
@@ -60,6 +81,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .cp-scan {
+    display: none;
+  }
+
   [data-reveal],
   [data-reveal].reveal-pending {
     opacity: 1;

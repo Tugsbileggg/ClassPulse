@@ -1,40 +1,33 @@
 import type { CSSProperties } from "react";
-import { Armchair, BellRing, ChartColumn, Eye, LayoutGrid, Moon, ShieldCheck, Smartphone } from "lucide-react";
+import { BellRing, MonitorPlay, Moon, Smartphone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const FEATURES = [
   {
-    icon: BellRing,
-    title: "Шууд мэдэгдэл",
-    text: "Сурагч унтаж, утсаа оролдож эсвэл удаан хугацаанд сатаарвал танд тэр даруй мэдэгдэнэ. Мэдэгдэл бүр аль эгнээ, аль суудал болохыг тодорхой заана.",
+    icon: Moon,
+    title: "Нойрмоглолт илрүүлэх",
+    text: "Толгойгоо унжуулах, ширээн дээр хэвтэх зэрэг байдлыг таньж, удаан үргэлжилбэл нойрмоглож буй гэж тэмдэглэнэ.",
+    accent: "bg-amber-50 text-amber-700",
+  },
+  {
+    icon: Smartphone,
+    title: "Утас ашиглалт илрүүлэх",
+    text: "Гартаа утас барьж, доошоо удаан харж буй сурагчийг ялгаж, ангийн аль хэсэгт байгааг дүрс дээр заана.",
     accent: "bg-rose-50 text-rose-600",
   },
   {
-    icon: ChartColumn,
-    title: "Өдрийн оролцооны тайлан",
-    text: "Өдрийн төгсгөлд сурагч тус бүрийн оролцооны хувийг нэг дор харна. Хэнд нэмэлт анхаарал хэрэгтэйг мэдрэмжээр биш, тоо баримтаар мэдэнэ.",
-    accent: "bg-emerald-50 text-emerald-700",
-  },
-  {
-    icon: LayoutGrid,
-    title: "Суудлын зураглал",
-    text: "Ангийн суудлын байрлалыг нэг удаа тохируулахад хангалттай. Систем сурагчийг царайгаар нь биш, суудаг байраар нь ялгаж танина.",
+    icon: BellRing,
+    title: "Багшид шууд мэдэгдэл",
+    text: "Илрүүлмэгц компьютерийн дэлгэцийн буланд мэдэгдэл гарч, тухайн сурагчийг камерын дүрс дээр өнгөт хүрээгээр тэмдэглэнэ.",
     accent: "bg-brand-50 text-brand-700",
   },
   {
-    icon: ShieldCheck,
-    title: "Нууцлалд төвлөрсөн",
-    text: "Бүх боловсруулалт ангийн компьютерийн хөтөч дотор явагдана. Видео бичлэг, зураг сервер рүү илгээгдэхгүй, хаана ч хадгалагдахгүй.",
-    accent: "bg-violet-50 text-violet-700",
+    icon: MonitorPlay,
+    title: "Ямар ч камертай ажиллана",
+    text: "Вэб камер эсвэл сургуулийн хяналтын камер — дэлгэцэн дээр гарч буй дүрсийг л уншина. Нэмэлт төхөөрөмж, сервер шаардлагагүй.",
+    accent: "bg-emerald-50 text-emerald-700",
   },
-];
-
-const SIGNALS = [
-  { icon: Armchair, label: "Суудалдаа байгаа эсэх" },
-  { icon: Moon, label: "Нойрмоглож, толгой унжсан эсэх" },
-  { icon: Eye, label: "Самбар руу харж буй эсэх" },
-  { icon: Smartphone, label: "Утсаа оролдож буй эсэх" },
 ];
 
 export function Features() {
@@ -44,23 +37,11 @@ export function Features() {
         <SectionHeading
           id="features-title"
           eyebrow="Боломжууд"
-          title="Хичээлийн үеэр ч, дараа нь ч танд туслана"
-          description="ClassPulse ангийг таны оронд ажиглаж, анхаарал шаардсан агшинд танд хэлнэ. Харин шийдвэр гаргах нь үргэлж багшийн эрх хэвээр үлдэнэ."
+          title="Хоёр зүйлийг анзаарч, танд цаг алдалгүй хэлнэ"
+          description="ClassPulse AI ангийг таны оронд ажиглаж, сурагч унтах эсвэл утсаа оролдох үед танд дохио өгнө. Харин юу хийхээ үргэлж багш өөрөө шийднэ."
         />
 
-        <div data-reveal className="mx-auto mt-10 max-w-4xl rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-center text-sm font-semibold text-slate-700">ClassPulse сурагч бүрийн хувьд юуг анзаардаг вэ?</p>
-          <ul className="mt-4 grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 md:grid-cols-4">
-            {SIGNALS.map(({ icon: Icon, label }) => (
-              <li key={label} className="flex items-center gap-3 rounded-xl bg-slate-50 px-3 py-2.5 text-sm font-medium text-slate-700">
-                <Icon className="size-5 shrink-0 text-brand-600" aria-hidden="true" />
-                {label}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <ul className="mt-10 grid gap-6 sm:grid-cols-2">
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2">
           {FEATURES.map(({ icon: Icon, title, text, accent }, index) => (
             <li
               key={title}

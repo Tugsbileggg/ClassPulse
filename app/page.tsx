@@ -1,11 +1,12 @@
 import { Audience } from "@/components/sections/Audience";
+import { DownloadSection } from "@/components/sections/DownloadSection";
 import { Faq } from "@/components/sections/Faq";
 import { Features } from "@/components/sections/Features";
 import { Footer } from "@/components/sections/Footer";
 import { Header } from "@/components/sections/Header";
 import { Hero } from "@/components/sections/Hero";
 import { HowItWorks } from "@/components/sections/HowItWorks";
-import { LoginSection } from "@/components/sections/LoginSection";
+import { Notifications } from "@/components/sections/Notifications";
 import { Privacy } from "@/components/sections/Privacy";
 import { Problem } from "@/components/sections/Problem";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
@@ -25,9 +26,10 @@ export default function HomePage() {
         <Problem />
         <Features />
         <HowItWorks />
+        <Notifications />
         <Privacy />
         <Audience />
-        <LoginSection />
+        <DownloadSection />
         <Faq />
       </main>
       <Footer />

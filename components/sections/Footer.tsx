@@ -1,7 +1,7 @@
 import { Mail } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
-import { LOGIN_HREF, NAV_LINKS, SITE } from "@/lib/site";
+import { DOWNLOAD_HREF, NAV_LINKS, SITE } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -11,8 +11,8 @@ export function Footer() {
           <div className="max-w-sm sm:col-span-2 md:col-span-1">
             <Logo />
             <p className="mt-4 leading-relaxed text-slate-600">
-              Багш нарт зориулсан ангийн оролцооны ухаалаг туслах. Нууцлалыг эрхэмлэн, Монголын сургуулиудад
-              зориулан бүтээв.
+              Унтаж, утсаа оролдож буй сурагчийг анзаарч багшид мэдэгддэг, компьютер дээр ажилладаг AI туслах.
+              Нууцлалыг эрхэмлэн, Монголын сургуулиудад зориулан бүтээв.
             </p>
           </div>
 
@@ -27,8 +27,8 @@ export function Footer() {
                 </li>
               ))}
               <li>
-                <a href={LOGIN_HREF} className="text-slate-600 hover:text-brand-700">
-                  Нэвтрэх
+                <a href={DOWNLOAD_HREF} className="text-slate-600 hover:text-brand-700">
+                  AI загвар татах
                 </a>
               </li>
             </ul>
