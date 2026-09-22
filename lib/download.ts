@@ -21,3 +21,8 @@ export const DOWNLOAD = {
 } as const;
 
 export const downloadReady = DOWNLOAD.url.length > 0;
+
+/** Татах товчны доорх жижиг бичиг, жишээ нь «Windows 10 / 11 (64-bit) · Хувилбар 1.0.0 · 420 MB». */
+export const downloadMeta = [DOWNLOAD.platform, DOWNLOAD.version && `Хувилбар ${DOWNLOAD.version}`, DOWNLOAD.size]
+  .filter(Boolean)
+  .join(" · ");

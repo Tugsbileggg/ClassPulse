@@ -199,9 +199,10 @@ export function DetectionMockup() {
       aria-label="ClassPulse AI програмын жишээ: ангийн камерын дүрс дээр AI нэг сурагчийг утсаа оролдож буй, нөгөөг нь нойрмоглож буйг илрүүлж өнгөт хүрээгээр тэмдэглэсэн. Дэлгэцийн буланд «Арын эгнээнд нэг сурагч утсаа оролдож байна» гэсэн мэдэгдэл гарсан."
       className="relative mx-auto w-full max-w-xl select-none sm:pb-16 lg:max-w-none"
     >
+      {/* lg дээр Hero-ийн өнгөт самбар энэ гэрэлтэлтийг орлоно. */}
       <div
         aria-hidden="true"
-        className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-tr from-brand-200/60 via-brand-50 to-emerald-100/70 blur-2xl"
+        className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-tr from-brand-200/60 via-brand-50 to-emerald-100/70 blur-2xl lg:hidden"
       />
 
       <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-2xl shadow-brand-900/10">

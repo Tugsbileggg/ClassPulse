@@ -1,7 +1,8 @@
-import { Activity, Check, Clock, Download, Info } from "lucide-react";
+import { Activity, Check, ChevronDown, Clock, Download, Info, Lock, Minus, Square, X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { DOWNLOAD, downloadReady } from "@/lib/download";
+import { WindowsLogo } from "@/components/ui/WindowsLogo";
+import { DOWNLOAD, downloadMeta, downloadReady } from "@/lib/download";
 
 const HIGHLIGHTS = [
   "Нэг удаа суулгаад л ашиглана",
@@ -9,94 +10,197 @@ const HIGHLIGHTS = [
   "Туршилтын хугацаанд үнэгүй",
 ];
 
-export function DownloadSection() {
-  const meta = [DOWNLOAD.platform, DOWNLOAD.version && `Хувилбар ${DOWNLOAD.version}`, DOWNLOAD.size]
-    .filter(Boolean)
-    .join(" · ");
+const INSTALL_STEPS = [
+  { label: "AI загварыг татлаа", done: true },
+  { label: "Компьютерт суулгалаа", done: true },
+  { label: "Хянах хэсгээ сонгох", done: false },
+];
 
+function AppIcon() {
   return (
-    <section
-      id="download"
-      aria-labelledby="download-title"
-      className="relative scroll-mt-16 overflow-hidden bg-gradient-to-b from-brand-50 to-white py-20 sm:py-24"
-    >
-      <Container className="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-16">
-        <div>
-          <SectionHeading
-            id="download-title"
-            align="left"
-            eyebrow="Татаж авах"
-            title="ClassPulse AI-г компьютертоо суулгаарай"
-            description="Нэг удаа суулгаад л ангийнхаа камерын дүрсийг хянаж эхэлнэ. AI загвар таны компьютер дээр ажилладаг тул видео интернэтээр дамжихгүй."
-          />
+    <span className="relative flex size-16 items-center justify-center overflow-hidden rounded-[1.1rem] bg-gradient-to-b from-brand-400 to-brand-600 text-white shadow-xl shadow-black/30 ring-1 ring-white/20">
+      <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/25 to-transparent" />
+      <Activity className="relative size-8" strokeWidth={2.5} aria-hidden="true" />
+    </span>
+  );
+}
 
-          <ul data-reveal className="mt-8 space-y-3.5">
-            {HIGHLIGHTS.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-slate-700">
-                <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
-                  <Check className="size-4" strokeWidth={3} aria-hidden="true" />
-                </span>
-                <span className="font-medium">{item}</span>
-              </li>
-            ))}
-          </ul>
+/** Суулгалт дууссан үеийн програмын цонх — banner-ын баруун ирмэгээр тасарч харагдана. */
+function InstallerMockup() {
+  return (
+    <div
+      role="img"
+      aria-label="ClassPulse AI-г суулгах цонхны жишээ: AI загварыг татаж, компьютерт суулгасан. Дараагийн алхам нь хянах хэсгээ сонгох."
+      className="relative hidden select-none lg:block"
+    >
+      <div className="absolute top-1/2 left-0 w-[calc(100%+5rem)] -translate-y-1/2 overflow-hidden rounded-l-2xl border border-white/15 bg-white text-slate-900 shadow-2xl shadow-black/40">
+        <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50 pl-4">
+          <span className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+            <span className="flex size-4 items-center justify-center rounded bg-brand-600 text-white">
+              <Activity className="size-3" strokeWidth={3} />
+            </span>
+            ClassPulse AI — Суулгалт
+          </span>
+          <span className="flex text-slate-500">
+            <span className="flex size-9 items-center justify-center">
+              <Minus className="size-3.5" />
+            </span>
+            <span className="flex size-9 items-center justify-center">
+              <Square className="size-3" />
+            </span>
+            <span className="flex size-9 items-center justify-center">
+              <X className="size-3.5" />
+            </span>
+          </span>
         </div>
 
-        <div
-          data-reveal
-          className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-brand-900/[0.07] sm:p-8"
-        >
-          <div className="flex items-center gap-4">
-            <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-brand-600 text-white shadow-lg shadow-brand-600/25">
-              <Activity className="size-7" strokeWidth={2.5} aria-hidden="true" />
+        <div className="p-6 pr-26">
+          <p className="text-lg font-bold">Суулгалт дууслаа</p>
+          <p className="mt-1 text-sm text-slate-600">Одоо ангийнхаа камерын дүрсийг хянаж эхлэхэд бэлэн.</p>
+
+          <div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-100">
+            <div className="h-full w-full rounded-full bg-gradient-to-r from-brand-500 to-emerald-500" />
+          </div>
+
+          <ol className="mt-5 space-y-2.5">
+            {INSTALL_STEPS.map(({ label, done }) => (
+              <li
+                key={label}
+                className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium ${
+                  done ? "text-slate-700" : "bg-brand-50 text-brand-800 ring-1 ring-brand-100"
+                }`}
+              >
+                {done ? (
+                  <span className="flex size-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                    <Check className="size-3.5" strokeWidth={3} />
+                  </span>
+                ) : (
+                  <span className="flex size-5 items-center justify-center rounded-full border-2 border-brand-500">
+                    <span className="size-1.5 rounded-full bg-brand-500" />
+                  </span>
+                )}
+                {label}
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-6 flex items-center justify-between gap-4">
+            <span className="inline-flex items-center gap-1.5 text-xs text-slate-500">
+              <Lock className="size-3.5" />
+              Видео таны компьютерээс гарахгүй
             </span>
-            <div className="min-w-0">
-              <h3 className="text-xl font-bold text-slate-900">ClassPulse AI</h3>
-              <p className="text-sm text-slate-600">{meta}</p>
+            <span className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white">Эхлүүлэх</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function DownloadSection() {
+  return (
+    <section id="download" aria-labelledby="download-title" className="scroll-mt-16 bg-white py-20 sm:py-24">
+      <Container>
+        <div className="relative isolate overflow-clip rounded-[2rem] bg-brand-950 px-6 py-12 text-white shadow-2xl shadow-brand-950/20 sm:px-10 sm:py-14 lg:grid lg:grid-cols-[1fr_1fr] lg:gap-10 lg:py-0 lg:pr-0 lg:pl-14">
+          <div aria-hidden="true" className="absolute -top-40 -left-32 -z-10 size-[30rem] rounded-full bg-brand-600/35 blur-3xl" />
+          <div
+            aria-hidden="true"
+            className="absolute -right-24 -bottom-48 -z-10 size-[28rem] rounded-full bg-emerald-500/15 blur-3xl"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 -z-10 [background-image:linear-gradient(rgb(255_255_255/0.05)_1px,transparent_1px),linear-gradient(90deg,rgb(255_255_255/0.05)_1px,transparent_1px)] [background-size:40px_40px] [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_70%)]"
+          />
+
+          <div className="lg:py-14">
+            <div data-reveal>
+              <AppIcon />
+            </div>
+
+            <div className="mt-7">
+              <SectionHeading
+                id="download-title"
+                align="left"
+                tone="dark"
+                eyebrow="Татаж авах"
+                title={
+                  <>
+                    <span className="whitespace-nowrap">ClassPulse AI-г</span> компьютертоо суулгаарай
+                  </>
+                }
+                description="Нэг удаа суулгаад л ангийнхаа камерын дүрсийг хянаж эхэлнэ. AI загвар таны компьютер дээр ажилладаг тул видео интернэтээр дамжихгүй."
+              />
+            </div>
+
+            <div data-reveal className="mt-8">
+              {downloadReady ? (
+                <a
+                  href={DOWNLOAD.url}
+                  download
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-base font-semibold text-brand-900 shadow-lg shadow-black/20 transition-colors hover:bg-brand-50 active:bg-brand-100 sm:w-auto"
+                >
+                  <Download
+                    className="size-5 transition-transform motion-safe:group-hover:translate-y-0.5"
+                    aria-hidden="true"
+                  />
+                  AI загвар татах
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  disabled
+                  className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl bg-white/10 px-7 py-3.5 text-base font-semibold text-white/75 ring-1 ring-white/15 ring-inset sm:w-auto"
+                >
+                  <Clock className="size-5" aria-hidden="true" />
+                  Тун удахгүй
+                </button>
+              )}
+
+              <p className="mt-3 flex items-center gap-2 text-sm text-slate-400">
+                <WindowsLogo className="size-3.5" />
+                {downloadMeta}
+              </p>
+
+              {downloadReady ? null : (
+                <p className="mt-4 flex max-w-md items-start gap-2 text-sm leading-relaxed text-slate-300">
+                  <Info className="mt-0.5 size-4 shrink-0 text-brand-300" aria-hidden="true" />
+                  AI загварыг одоо эцэслэн бэлтгэж байна. Бэлэн болмогц энэ товч идэвхжиж, шууд татаж авах боломжтой
+                  болно.
+                </p>
+              )}
+
+              <ul className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-x-6">
+                {HIGHLIGHTS.map((item) => (
+                  <li key={item} className="inline-flex items-center gap-2 text-sm font-medium text-slate-200">
+                    <span className="flex size-5 items-center justify-center rounded-full bg-emerald-400/15 text-emerald-300">
+                      <Check className="size-3.5" strokeWidth={3} aria-hidden="true" />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <details className="group mt-8 border-t border-white/10 pt-5">
+                <summary className="inline-flex cursor-pointer list-none items-center gap-2 rounded-md text-sm font-semibold text-white transition-colors hover:text-brand-200">
+                  Системийн шаардлага
+                  <ChevronDown
+                    className="size-4 transition-transform duration-200 group-open:rotate-180"
+                    aria-hidden="true"
+                  />
+                </summary>
+                <ul className="mt-4 grid gap-2.5 sm:grid-cols-2 sm:gap-x-6">
+                  {DOWNLOAD.requirements.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm text-slate-300">
+                      <Check className="mt-0.5 size-4 shrink-0 text-emerald-400" strokeWidth={3} aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </details>
             </div>
           </div>
 
-          {downloadReady ? (
-            <a
-              href={DOWNLOAD.url}
-              download
-              className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm shadow-brand-600/25 transition-colors hover:bg-brand-700 active:bg-brand-800"
-            >
-              <Download
-                className="size-5 transition-transform motion-safe:group-hover:translate-y-0.5"
-                aria-hidden="true"
-              />
-              AI загвар татах
-            </a>
-          ) : (
-            <>
-              <button
-                type="button"
-                disabled
-                className="mt-6 inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-100 px-6 py-3.5 text-base font-semibold text-slate-600"
-              >
-                <Clock className="size-5" aria-hidden="true" />
-                Тун удахгүй
-              </button>
-              <p className="mt-3 flex items-start gap-2 text-sm leading-relaxed text-slate-600">
-                <Info className="mt-0.5 size-4 shrink-0 text-brand-600" aria-hidden="true" />
-                AI загварыг одоо эцэслэн бэлтгэж байна. Бэлэн болмогц энэ товч идэвхжиж, шууд татаж авах боломжтой
-                болно.
-              </p>
-            </>
-          )}
-
-          <div className="mt-6 border-t border-slate-100 pt-6">
-            <h4 className="text-sm font-semibold text-slate-900">Системийн шаардлага</h4>
-            <ul className="mt-3 space-y-2.5">
-              {DOWNLOAD.requirements.map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm text-slate-700">
-                  <Check className="mt-0.5 size-4 shrink-0 text-emerald-600" strokeWidth={3} aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <InstallerMockup />
         </div>
       </Container>
     </section>
