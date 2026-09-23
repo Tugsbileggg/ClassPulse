@@ -2,8 +2,9 @@ import { ArrowRight, Check, ScanEye } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { DetectionMockup } from "@/components/ui/DetectionMockup";
+import { AppleLogo } from "@/components/ui/AppleLogo";
 import { WindowsLogo } from "@/components/ui/WindowsLogo";
-import { downloadMeta, downloadReady } from "@/lib/download";
+import { downloadMeta } from "@/lib/download";
 
 const TRUST_POINTS = [
   "Таны компьютер дээр ажиллана",
@@ -58,7 +59,7 @@ export function Hero() {
         <div className="max-w-xl">
           <p className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white px-3 py-1 text-sm font-medium text-brand-800 shadow-sm">
             <span className="size-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
-            {downloadReady ? "Windows-д зориулсан AI загвар гарлаа" : "AI загвар тун удахгүй гарна"}
+            Туршилтын хувилбар гарлаа — Windows, Mac
           </p>
 
           <h1
@@ -79,6 +80,7 @@ export function Hero() {
               <CtaLink size="lg" />
               <p className="mt-3 flex items-center justify-center gap-2 text-sm text-slate-500 sm:justify-start">
                 <WindowsLogo className="size-3.5 text-slate-400" />
+                <AppleLogo className="size-3.5 text-slate-400" />
                 {downloadMeta}
               </p>
             </div>

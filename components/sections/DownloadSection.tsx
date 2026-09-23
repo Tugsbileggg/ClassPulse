@@ -1,8 +1,9 @@
-import { Activity, Check, ChevronDown, Clock, Download, Info, Lock, Minus, Square, X } from "lucide-react";
+import { Activity, Check, ChevronDown, Download, Info, Lock, Minus, Square, X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { AppleLogo } from "@/components/ui/AppleLogo";
 import { WindowsLogo } from "@/components/ui/WindowsLogo";
-import { DOWNLOAD, downloadMeta, downloadReady } from "@/lib/download";
+import { COMMON_REQUIREMENTS, DOWNLOADS, downloadMeta, type DownloadTarget } from "@/lib/download";
 
 const HIGHLIGHTS = [
   "Нэг удаа суулгаад л ашиглана",
@@ -15,6 +16,10 @@ const INSTALL_STEPS = [
   { label: "Компьютерт суулгалаа", done: true },
   { label: "Хянах хэсгээ сонгох", done: false },
 ];
+
+function OsLogo({ os, className }: { os: DownloadTarget["os"]; className?: string }) {
+  return os === "windows" ? <WindowsLogo className={className} /> : <AppleLogo className={className} />;
+}
 
 function AppIcon() {
   return (
@@ -133,41 +138,32 @@ export function DownloadSection() {
             </div>
 
             <div data-reveal className="mt-8">
-              {downloadReady ? (
-                <a
-                  href={DOWNLOAD.url}
-                  download
-                  className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-base font-semibold text-brand-900 shadow-lg shadow-black/20 transition-colors hover:bg-brand-50 active:bg-brand-100 sm:w-auto"
-                >
-                  <Download
-                    className="size-5 transition-transform motion-safe:group-hover:translate-y-0.5"
-                    aria-hidden="true"
-                  />
-                  AI загвар татах
-                </a>
-              ) : (
-                <button
-                  type="button"
-                  disabled
-                  className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl bg-white/10 px-7 py-3.5 text-base font-semibold text-white/75 ring-1 ring-white/15 ring-inset sm:w-auto"
-                >
-                  <Clock className="size-5" aria-hidden="true" />
-                  Тун удахгүй
-                </button>
-              )}
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                {DOWNLOADS.map(({ os, label, url, platform }) => (
+                  <a
+                    key={os}
+                    href={url}
+                    download
+                    aria-label={`${label} (${platform})`}
+                    className="group inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-white px-6 py-3.5 text-base font-semibold text-brand-900 shadow-lg shadow-black/20 transition-colors hover:bg-brand-50 active:bg-brand-100 sm:w-64"
+                  >
+                    <OsLogo os={os} className="size-4" />
+                    {label}
+                    <Download
+                      className="size-4 opacity-60 transition-transform motion-safe:group-hover:translate-y-0.5"
+                      aria-hidden="true"
+                    />
+                  </a>
+                ))}
+              </div>
 
-              <p className="mt-3 flex items-center gap-2 text-sm text-slate-400">
-                <WindowsLogo className="size-3.5" />
-                {downloadMeta}
+              <p className="mt-3 text-sm text-slate-400">{downloadMeta}</p>
+
+              <p className="mt-4 flex max-w-md items-start gap-2 text-sm leading-relaxed text-slate-300">
+                <Info className="mt-0.5 size-4 shrink-0 text-brand-300" aria-hidden="true" />
+                Zip-ийг задлаад доторх «Заавар.txt»-ийн дагуу суулгана. Анх суулгахад AI сан, загварыг интернэтээс
+                татна (10–20 минут).
               </p>
-
-              {downloadReady ? null : (
-                <p className="mt-4 flex max-w-md items-start gap-2 text-sm leading-relaxed text-slate-300">
-                  <Info className="mt-0.5 size-4 shrink-0 text-brand-300" aria-hidden="true" />
-                  AI загварыг одоо эцэслэн бэлтгэж байна. Бэлэн болмогц энэ товч идэвхжиж, шууд татаж авах боломжтой
-                  болно.
-                </p>
-              )}
 
               <ul className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-x-6">
                 {HIGHLIGHTS.map((item) => (
@@ -188,14 +184,28 @@ export function DownloadSection() {
                     aria-hidden="true"
                   />
                 </summary>
-                <ul className="mt-4 grid gap-2.5 sm:grid-cols-2 sm:gap-x-6">
-                  {DOWNLOAD.requirements.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5 text-sm text-slate-300">
-                      <Check className="mt-0.5 size-4 shrink-0 text-emerald-400" strokeWidth={3} aria-hidden="true" />
-                      {item}
-                    </li>
+                <div className="mt-4 grid gap-6 sm:grid-cols-2 sm:gap-x-6">
+                  {DOWNLOADS.map(({ os, platform, requirements }) => (
+                    <div key={os}>
+                      <p className="flex items-center gap-2 text-sm font-semibold text-white">
+                        <OsLogo os={os} className="size-3.5" />
+                        {platform}
+                      </p>
+                      <ul className="mt-3 space-y-2.5">
+                        {[...requirements, ...COMMON_REQUIREMENTS].map((item) => (
+                          <li key={item} className="flex items-start gap-2.5 text-sm text-slate-300">
+                            <Check
+                              className="mt-0.5 size-4 shrink-0 text-emerald-400"
+                              strokeWidth={3}
+                              aria-hidden="true"
+                            />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </details>
             </div>
           </div>
