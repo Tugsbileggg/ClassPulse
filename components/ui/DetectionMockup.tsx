@@ -1,11 +1,30 @@
+import { Moon, Smartphone } from "lucide-react";
 import Image from "next/image";
 import cameraDetection from "@/public/images/hero-camera-detection.webp";
-import appMockup from "@/public/images/hero-app-mockup.png";
+import sleepDetail from "@/public/images/hero-detail-sleep.webp";
+import phoneDetail from "@/public/images/hero-detail-phone.webp";
 
-/** Hero хэсгийн жишээ зураг — ангийн камерын дүрс болон ClassPulse AI програмын дэлгэцийн агшин. */
+const DETAILS = [
+  {
+    src: sleepDetail,
+    tone: "amber" as const,
+    icon: Moon,
+    label: "Нойрмоглож байна",
+    alt: "Ойртуулсан зураг: сурагч ширээндээ толгойгоо тавьж унтаж байгааг AI илрүүлэв",
+  },
+  {
+    src: phoneDetail,
+    tone: "rose" as const,
+    icon: Smartphone,
+    label: "Утсаар тоглож",
+    alt: "Ойртуулсан зураг: сурагч хичээлийн үеэр гар утсаа ашиглаж байгааг AI илрүүлэв",
+  },
+];
+
+/** Hero хэсгийн жишээ зураг — камерын дүрс болон AI-н илрүүлсэн хоёр агшны ойртуулсан зураг. */
 export function DetectionMockup() {
   return (
-    <div className="relative mx-auto w-full max-w-xl select-none pb-16 sm:pb-24 lg:max-w-none lg:pb-16">
+    <div className="relative mx-auto w-full max-w-xl select-none lg:max-w-none">
       {/* lg дээр Hero-ийн өнгөт самбар энэ гэрэлтэлтийг орлоно. */}
       <div
         aria-hidden="true"
@@ -23,15 +42,29 @@ export function DetectionMockup() {
         />
       </div>
 
-      {/* Програмын дэлгэцийн жишээ — үндсэн зургийн дээр давхарлав */}
-      <div className="absolute -bottom-2 left-4 w-56 overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-xl shadow-slate-900/15 sm:-bottom-6 sm:left-1/2 sm:w-72 sm:-translate-x-[62%] lg:bottom-0 lg:left-0 lg:w-72 lg:translate-x-0">
-        <Image
-          src={appMockup}
-          alt="ClassPulse AI програмын дэлгэц: утас болон нойрмоглолт илрүүлсэн мэдэгдэл"
-          className="h-auto w-full"
-          placeholder="blur"
-          sizes="(min-width: 1024px) 18rem, 14rem"
-        />
+      <div className="mt-4 grid grid-cols-2 gap-4">
+        {DETAILS.map(({ src, tone, icon: Icon, label, alt }) => {
+          const ring = tone === "rose" ? "ring-rose-500/40" : "ring-amber-400/40";
+          const chip = tone === "rose" ? "bg-rose-600 text-white" : "bg-amber-400 text-slate-900";
+          return (
+            <div
+              key={label}
+              className={`overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-lg shadow-slate-900/10 ring-2 ${ring}`}
+            >
+              <div className="relative">
+                <Image src={src} alt={alt} className="h-auto w-full" sizes="(min-width: 1024px) 19vw, 44vw" />
+              </div>
+              <div className="flex items-center gap-1.5 px-2.5 py-2">
+                <span className={`flex size-5 shrink-0 items-center justify-center rounded-full ${chip}`}>
+                  <Icon className="size-3" aria-hidden="true" />
+                </span>
+                <span className="truncate text-xs font-semibold whitespace-nowrap text-slate-800 sm:text-sm">
+                  {label}
+                </span>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
